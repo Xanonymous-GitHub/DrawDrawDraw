@@ -12,62 +12,62 @@ namespace DrawingForm
 {
     public partial class Form1 : Form
     {
-        DrawingModel.Model _model;
-        PresentationModel.PresentationModel _presentationModel;
-        Panel _canvas = new DoubleBufferedPanel();
+        private readonly DrawingModel.Model _model;
+        private readonly PresentationModel.PresentationModel _presentationModel;
+        private readonly Panel _canvas = new DoubleBufferedPanel();
 
         public Form1()
         {
             InitializeComponent();
             _canvas.Dock = DockStyle.Fill;
-            _canvas.BackColor = System.Drawing.Color.LightYellow;
+            _canvas.BackColor = Color.LightYellow;
             _canvas.MouseDown += HandleCanvasPressed;
             _canvas.MouseUp += HandleCanvasReleased;
             _canvas.MouseMove += HandleCanvasMoved;
             _canvas.Paint += HandleCanvasPaint;
             Controls.Add(_canvas);
 
-            Button clear = new Button();
+            Button clear = new();
             clear.Text = "Clear";
             clear.Dock = DockStyle.Top;
             clear.AutoSize = true;
             clear.AutoSizeMode =
-            System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            AutoSizeMode.GrowAndShrink;
             clear.Click += HandleClearButtonClick;
             Controls.Add(clear);
 
             _model = new DrawingModel.Model();
-            _presentationModel = new PresentationModel.PresentationModel(_model,_canvas);
+            _presentationModel = new PresentationModel.PresentationModel(_model, _canvas);
 
             _model._modelChanged += HandleModelChanged;
         }
 
-        public void HandleClearButtonClick(object sender, System.EventArgs e)
+        public void HandleClearButtonClick(object sender, EventArgs e)
         {
             _model.Clear();
         }
 
-        public void HandleCanvasPressed(object sender, System.Windows.Forms.MouseEventArgs e) 
+        public void HandleCanvasPressed(object sender, MouseEventArgs e)
         {
             _model.PointerPressed(e.X, e.Y);
         }
 
-        public void HandleCanvasReleased(object sender, System.Windows.Forms.MouseEventArgs e) 
+        public void HandleCanvasReleased(object sender, MouseEventArgs e)
         {
             _model.PointerReleased(e.X, e.Y);
         }
 
-        public void HandleCanvasMoved(object sender,System.Windows.Forms.MouseEventArgs e) 
+        public void HandleCanvasMoved(object sender, MouseEventArgs e)
         {
             _model.PointerMoved(e.X, e.Y);
         }
 
-        public void HandleCanvasPaint(object sender, System.Windows.Forms.PaintEventArgs e)
+        public void HandleCanvasPaint(object sender, PaintEventArgs e)
         {
             _presentationModel.Draw(e.Graphics);
         }
 
-        public void HandleModelChanged() 
+        public void HandleModelChanged()
         {
             Invalidate(true);
         }

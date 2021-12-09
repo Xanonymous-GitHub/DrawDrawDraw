@@ -6,19 +6,20 @@ using System.Threading.Tasks;
 
 namespace DrawingModel
 {
-    class Model
+    internal class Model
     {
         public event ModelChangedEventHandler _modelChanged;
         public delegate void ModelChangedEventHandler();
-        double _firstPointX;
-        double _firstPointY;
-        bool _isPressed = false;
-        List<Line> _lines = new List<Line>();
-        Line _hint = new Line();
 
-        public void PointerPressed(double x, double y) 
+        private double _firstPointX;
+        private double _firstPointY;
+        bool _isPressed = false;
+        private readonly List<Line> _lines = new();
+        private readonly Line _hint = new();
+
+        public void PointerPressed(double x, double y)
         {
-            if (x > 0 && y > 0) 
+            if (x > 0 && y > 0)
             {
                 _firstPointX = x;
                 _firstPointY = y;
@@ -43,7 +44,7 @@ namespace DrawingModel
             if (_isPressed)
             {
                 _isPressed = false;
-                Line hint = new Line();
+                Line hint = new();
                 hint.x1 = _firstPointX;
                 hint.y1 = _firstPointY;
                 hint.x2 = x;
@@ -53,7 +54,7 @@ namespace DrawingModel
             }
         }
 
-        public void Clear() 
+        public void Clear()
         {
             _isPressed = false;
             _lines.Clear();
@@ -64,15 +65,19 @@ namespace DrawingModel
         {
             graphics.ClearAll();
             foreach (Line aLine in _lines)
+            {
                 aLine.Draw(graphics);
+            }
+
             if (_isPressed)
+            {
                 _hint.Draw(graphics);
+            }
         }
 
-        void NotifyModelChanged()
+        private void NotifyModelChanged()
         {
-            if (_modelChanged != null)
-                _modelChanged();
+            _modelChanged?.Invoke();
         }
     }
 }

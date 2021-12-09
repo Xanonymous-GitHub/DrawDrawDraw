@@ -22,14 +22,14 @@ namespace DrawingApp
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        DrawingModel.Model _model;
-        PresentationModel.PresentationModel _presentationModel;
+        private readonly DrawingModel.Model _model;
+        private readonly PresentationModel.PresentationModel _presentationModel;
 
         public MainPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             _model = new DrawingModel.Model();
-            _presentationModel = new PresentationModel.PresentationModel(_model,_canvas);
+            _presentationModel = new PresentationModel.PresentationModel(_model, _canvas);
             _canvas.PointerPressed += HandleCanvasPressed;
             _canvas.PointerReleased += HandleCanvasReleased;
             _canvas.PointerMoved += HandleCanvasMoved;
@@ -37,27 +37,27 @@ namespace DrawingApp
             _model._modelChanged += HandleModelChanged;
         }
 
-        private void HandleClearButtonClick(object sender, RoutedEventArgs e) 
+        private void HandleClearButtonClick(object sender, RoutedEventArgs e)
         {
             _model.Clear();
         }
 
-        public void HandleCanvasPressed(object sender, PointerRoutedEventArgs e) 
+        public void HandleCanvasPressed(object sender, PointerRoutedEventArgs e)
         {
             _model.PointerPressed(e.GetCurrentPoint(_canvas).Position.X, e.GetCurrentPoint(_canvas).Position.Y);
         }
 
-        public void HandleCanvasReleased(object sender, PointerRoutedEventArgs e) 
+        public void HandleCanvasReleased(object sender, PointerRoutedEventArgs e)
         {
-            _model.PointerReleased(e.GetCurrentPoint(_canvas).Position.X,e.GetCurrentPoint(_canvas).Position.Y);
+            _model.PointerReleased(e.GetCurrentPoint(_canvas).Position.X, e.GetCurrentPoint(_canvas).Position.Y);
         }
 
-        public void HandleCanvasMoved(object sender, PointerRoutedEventArgs e) 
+        public void HandleCanvasMoved(object sender, PointerRoutedEventArgs e)
         {
             _model.PointerMoved(e.GetCurrentPoint(_canvas).Position.X, e.GetCurrentPoint(_canvas).Position.Y);
         }
 
-        public void HandleModelChanged() 
+        public void HandleModelChanged()
         {
             _presentationModel.Draw();
         }
