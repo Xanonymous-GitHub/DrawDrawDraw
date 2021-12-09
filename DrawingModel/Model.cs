@@ -61,17 +61,17 @@ namespace DrawingModel
             NotifyModelChanged();
         }
 
-        public void Draw(IGraphics graphics)
+        public void DrawBy(IPainter graphics)
         {
             graphics.ClearAll();
             foreach (Line aLine in _lines)
             {
-                aLine.Draw(graphics);
+                aLine.DrawBy(graphics);
             }
 
             if (_isPressed)
             {
-                _hint.Draw(graphics);
+                _hint.DrawBy(graphics);
             }
         }
 

@@ -1,7 +1,7 @@
 ﻿
 namespace DrawingForm
 {
-    partial class Form1
+    partial class CanvasForm
     {
         /// <summary>
         /// 設計工具所需的變數。

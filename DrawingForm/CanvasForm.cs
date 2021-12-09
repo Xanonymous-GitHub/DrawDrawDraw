@@ -10,13 +10,13 @@ using System.Windows.Forms;
 
 namespace DrawingForm
 {
-    public partial class Form1 : Form
+    public partial class CanvasForm : Form
     {
         private readonly DrawingModel.Model _model;
         private readonly PresentationModel.PresentationModel _presentationModel;
         private readonly Panel _canvas = new DoubleBufferedPanel();
 
-        public Form1()
+        public CanvasForm()
         {
             InitializeComponent();
             _canvas.Dock = DockStyle.Fill;
@@ -31,14 +31,12 @@ namespace DrawingForm
             clear.Text = "Clear";
             clear.Dock = DockStyle.Top;
             clear.AutoSize = true;
-            clear.AutoSizeMode =
-            AutoSizeMode.GrowAndShrink;
+            clear.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             clear.Click += HandleClearButtonClick;
             Controls.Add(clear);
 
             _model = new();
             _presentationModel = new(_model, _canvas);
-
             _model._modelChanged += HandleModelChanged;
         }
 

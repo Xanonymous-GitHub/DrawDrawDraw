@@ -13,9 +13,9 @@ namespace DrawingModel
         public double x2;
         public double y2;
 
-        public void Draw(IGraphics graphics)
+        public void DrawBy(IPainter painter)
         {
-            graphics.DrawLine(x1, y1, x2, y2);
+            painter.DrawLine(x1, y1, x2, y2);
         }
     }
 }

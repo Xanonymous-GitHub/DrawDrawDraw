@@ -11,10 +11,10 @@ using DrawingModel;
 
 namespace DrawingApp.PresentationModel
 {
-    internal class WindowsStoreGraphicsAdaptor : IGraphics
+    internal class WindowsStorePainterAdaptor : IPainter
     {
         Canvas _canvas;
-        public WindowsStoreGraphicsAdaptor(Canvas canvas)
+        public WindowsStorePainterAdaptor(Canvas canvas)
         {
             _canvas = canvas;
         }
@@ -22,6 +22,15 @@ namespace DrawingApp.PresentationModel
         public void ClearAll()
         {
             _canvas.Children.Clear();
+        }
+
+        public void DrawEllipse(double x1, double y1, double x2, double y2)
+        {
+            Ellipse ellipse = new();
+            ellipse.Fill = new SolidColorBrush(Colors.Orange);
+            ellipse.Width = Math.Abs(x2 - x1);
+            ellipse.Height = Math.Abs(y2 - y1);
+            _canvas.Children.Add(ellipse);
         }
 
         public void DrawLine(double x1, double y1, double x2, double y2)
@@ -36,6 +45,14 @@ namespace DrawingApp.PresentationModel
             };
 
             _canvas.Children.Add(line);
+        }
+
+        public void DrawRectangle(double x1, double y1, double x2, double y2)
+        {
+            Rectangle rectangle = new();
+            rectangle.Width = Math.Abs(x2 - x1);
+            rectangle.Height = Math.Abs(y2 - y1);
+            _canvas.Children.Add(rectangle);
         }
     }
 }

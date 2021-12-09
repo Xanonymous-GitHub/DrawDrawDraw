@@ -18,7 +18,7 @@ namespace DrawingForm
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new CanvasForm());
         }
 
         // High DPI Display Fix

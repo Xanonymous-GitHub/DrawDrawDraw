@@ -11,17 +11,17 @@ namespace DrawingApp.PresentationModel
     internal class PresentationModel
     {
         Model _model;
-        IGraphics _igraphics;
+        IPainter _painter;
 
-        public PresentationModel(Model model, Canvas canvas) 
+        public PresentationModel(Model model, Canvas canvas)
         {
             _model = model;
-            _igraphics = new WindowsStoreGraphicsAdaptor(canvas);
+            _painter = new WindowsStorePainterAdaptor(canvas);
         }
 
         public void Draw()
         {
-            _model.Draw(_igraphics);
+            _model.DrawBy(_painter);
         }
     }
 }
