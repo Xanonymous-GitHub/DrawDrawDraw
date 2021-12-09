@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DrawingForm.PresentationModel
 {
-    class WindowsFormsGraphicsAdaptor : IGraphics
+    internal class WindowsFormsGraphicsAdaptor : IGraphics
     {
         Graphics _graphics;
 
@@ -22,7 +22,7 @@ namespace DrawingForm.PresentationModel
 
         }
 
-        public void DrawLine(double x1, double y1, double x2, double y2) 
+        public void DrawLine(double x1, double y1, double x2, double y2)
         {
             _graphics.DrawLine(Pens.Black, (float)x1, (float)y1, (float)x2, (float)y2);
         }

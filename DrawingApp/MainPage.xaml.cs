@@ -28,8 +28,8 @@ namespace DrawingApp
         public MainPage()
         {
             InitializeComponent();
-            _model = new DrawingModel.Model();
-            _presentationModel = new PresentationModel.PresentationModel(_model, _canvas);
+            _model = new();
+            _presentationModel = new(_model, _canvas);
             _canvas.PointerPressed += HandleCanvasPressed;
             _canvas.PointerReleased += HandleCanvasReleased;
             _canvas.PointerMoved += HandleCanvasMoved;

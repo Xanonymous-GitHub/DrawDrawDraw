@@ -36,8 +36,8 @@ namespace DrawingForm
             clear.Click += HandleClearButtonClick;
             Controls.Add(clear);
 
-            _model = new DrawingModel.Model();
-            _presentationModel = new PresentationModel.PresentationModel(_model, _canvas);
+            _model = new();
+            _presentationModel = new(_model, _canvas);
 
             _model._modelChanged += HandleModelChanged;
         }

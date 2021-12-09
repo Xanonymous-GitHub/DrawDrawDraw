@@ -8,18 +8,18 @@ using DrawingModel;
 
 namespace DrawingApp.PresentationModel
 {
-    class PresentationModel
+    internal class PresentationModel
     {
         Model _model;
         IGraphics _igraphics;
 
         public PresentationModel(Model model, Canvas canvas) 
         {
-            this._model = model;
+            _model = model;
             _igraphics = new WindowsStoreGraphicsAdaptor(canvas);
         }
 
-        public void Draw() 
+        public void Draw()
         {
             _model.Draw(_igraphics);
         }
