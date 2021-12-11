@@ -26,6 +26,16 @@ namespace DrawingApp.PresentationModel
 
         public void DrawEllipse(double x1, double y1, double x2, double y2)
         {
+            if (x1 > x2)
+            {
+                (x1, x2) = (x2, x1);
+            }
+
+            if (y1 > y2)
+            {
+                (y1, y2) = (y2, y1);
+            }
+
             Windows.UI.Xaml.Shapes.Ellipse ellipse = new()
             {
                 Width = Math.Abs(x2 - x1),
@@ -33,6 +43,10 @@ namespace DrawingApp.PresentationModel
                 Fill = new SolidColorBrush(Colors.Orange),
                 Stroke = new SolidColorBrush(Colors.Black)
             };
+
+            Canvas.SetTop(ellipse, y1);
+            Canvas.SetLeft(ellipse, x1);
+
             _canvas.Children.Add(ellipse);
         }
 
@@ -51,6 +65,16 @@ namespace DrawingApp.PresentationModel
 
         public void DrawRectangle(double x1, double y1, double x2, double y2)
         {
+            if (x1 > x2)
+            {
+                (x1, x2) = (x2, x1);
+            }
+
+            if (y1 > y2)
+            {
+                (y1, y2) = (y2, y1);
+            }
+
             Windows.UI.Xaml.Shapes.Rectangle rectangle = new()
             {
                 Width = Math.Abs(x2 - x1),
@@ -58,6 +82,10 @@ namespace DrawingApp.PresentationModel
                 Fill = new SolidColorBrush(Colors.Yellow),
                 Stroke = new SolidColorBrush(Colors.Black)
             };
+
+            Canvas.SetTop(rectangle, y1);
+            Canvas.SetLeft(rectangle, x1);
+
             _canvas.Children.Add(rectangle);
         }
     }
