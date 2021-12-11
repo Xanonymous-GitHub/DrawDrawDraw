@@ -50,6 +50,7 @@ namespace DrawingApp.PresentationModel
         public void DrawRectangle(double x1, double y1, double x2, double y2)
         {
             Rectangle rectangle = new();
+            rectangle.Fill = new SolidColorBrush(Colors.Yellow);
             rectangle.Width = Math.Abs(x2 - x1);
             rectangle.Height = Math.Abs(y2 - y1);
             _canvas.Children.Add(rectangle);

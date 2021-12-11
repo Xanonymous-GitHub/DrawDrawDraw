@@ -29,7 +29,7 @@ namespace DrawingForm.PresentationModel
 
         public void DrawEllipse(double x1, double y1, double x2, double y2)
         {
-            _graphics.DrawEllipse(Pens.Yellow, new((int)Math.Round(x1), (int)Math.Round(x2), (int)Math.Round(y1), (int)Math.Round(y2)));
+            _graphics.DrawEllipse(Pens.Orange, new((int)Math.Round(x1), (int)Math.Round(x2), (int)Math.Round(y1), (int)Math.Round(y2)));
         }
 
         public void DrawLine(double x1, double y1, double x2, double y2)
@@ -39,7 +39,7 @@ namespace DrawingForm.PresentationModel
 
         public void DrawRectangle(double x1, double y1, double x2, double y2)
         {
-            _graphics.DrawRectangle(Pens.Orange, new((int)Math.Round(x1), (int)Math.Round(x2), (int)Math.Round(y1), (int)Math.Round(y2)));
+            _graphics.DrawRectangle(Pens.Yellow, new((int)Math.Round(x1), (int)Math.Round(x2), (int)Math.Round(y1), (int)Math.Round(y2)));
         }
     }
 }
