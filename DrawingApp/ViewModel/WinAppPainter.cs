@@ -26,10 +26,13 @@ namespace DrawingApp.PresentationModel
 
         public void DrawEllipse(double x1, double y1, double x2, double y2)
         {
-            Windows.UI.Xaml.Shapes.Ellipse ellipse = new();
-            ellipse.Fill = new SolidColorBrush(Colors.Orange);
-            ellipse.Width = Math.Abs(x2 - x1);
-            ellipse.Height = Math.Abs(y2 - y1);
+            Windows.UI.Xaml.Shapes.Ellipse ellipse = new()
+            {
+                Width = Math.Abs(x2 - x1),
+                Height = Math.Abs(y2 - y1),
+                Fill = new SolidColorBrush(Colors.Orange),
+                Stroke = new SolidColorBrush(Colors.Black)
+            };
             _canvas.Children.Add(ellipse);
         }
 
@@ -43,16 +46,18 @@ namespace DrawingApp.PresentationModel
                 Y2 = y2,
                 Stroke = new SolidColorBrush(Colors.Black)
             };
-
             _canvas.Children.Add(line);
         }
 
         public void DrawRectangle(double x1, double y1, double x2, double y2)
         {
-            Windows.UI.Xaml.Shapes.Rectangle rectangle = new();
-            rectangle.Fill = new SolidColorBrush(Colors.Yellow);
-            rectangle.Width = Math.Abs(x2 - x1);
-            rectangle.Height = Math.Abs(y2 - y1);
+            Windows.UI.Xaml.Shapes.Rectangle rectangle = new()
+            {
+                Width = Math.Abs(x2 - x1),
+                Height = Math.Abs(y2 - y1),
+                Fill = new SolidColorBrush(Colors.Yellow),
+                Stroke = new SolidColorBrush(Colors.Black)
+            };
             _canvas.Children.Add(rectangle);
         }
     }

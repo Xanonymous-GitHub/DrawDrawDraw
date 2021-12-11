@@ -40,7 +40,7 @@ namespace DrawingForm
 
         private void InitDefaultDrawingMode()
         {
-            InitLineMode();
+            InitRectangleMode();
         }
 
         public void InitLineMode()

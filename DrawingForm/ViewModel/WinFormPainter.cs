@@ -29,7 +29,8 @@ namespace DrawingForm.PresentationModel
 
         public void DrawEllipse(double x1, double y1, double x2, double y2)
         {
-            _graphics.DrawEllipse(Pens.Orange, new((int)Math.Round(x1), (int)Math.Round(x2), (int)Math.Round(y1), (int)Math.Round(y2)));
+            SolidBrush solidBrush = new(Color.Orange);
+            _graphics.FillEllipse(solidBrush, (float)x1, (float)y1, (float)(x2 - x1), (float)(y2 - y1));
         }
 
         public void DrawLine(double x1, double y1, double x2, double y2)
@@ -39,7 +40,19 @@ namespace DrawingForm.PresentationModel
 
         public void DrawRectangle(double x1, double y1, double x2, double y2)
         {
-            _graphics.DrawRectangle(Pens.Yellow, new((int)Math.Round(x1), (int)Math.Round(x2), (int)Math.Round(y1), (int)Math.Round(y2)));
+            SolidBrush solidBrush = new(Color.Yellow);
+
+            if (x1 > x2)
+            {
+                (x1, x2) = (x2, x1);
+            }
+
+            if (y1 > y2)
+            {
+                (y1, y2) = (y2, y1);
+            }
+
+            _graphics.FillRectangle(solidBrush, (float)x1, (float)y1, (float)(x2 - x1), (float)(y2 - y1));
         }
     }
 }

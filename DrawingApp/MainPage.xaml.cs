@@ -38,7 +38,7 @@ namespace DrawingApp
 
         private void InitDefaultDrawingMode()
         {
-            InitLineMode();
+            InitEllipseMode();
         }
 
         public void InitLineMode()

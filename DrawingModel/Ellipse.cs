@@ -14,7 +14,7 @@
 
         public override void DrawBy(IPainter painter)
         {
-            painter.DrawEllipse(x1, x2, y1, y2);
+            painter.DrawEllipse(x1, y1, x2, y2);
         }
     }
 }
