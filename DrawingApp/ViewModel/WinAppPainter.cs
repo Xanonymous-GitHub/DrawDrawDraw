@@ -11,10 +11,10 @@ using DrawingModel;
 
 namespace DrawingApp.PresentationModel
 {
-    internal class WindowsStorePainterAdaptor : IPainter
+    internal class WinAppPainter : IPainter
     {
         Canvas _canvas;
-        public WindowsStorePainterAdaptor(Canvas canvas)
+        public WinAppPainter(Canvas canvas)
         {
             _canvas = canvas;
         }
@@ -26,7 +26,7 @@ namespace DrawingApp.PresentationModel
 
         public void DrawEllipse(double x1, double y1, double x2, double y2)
         {
-            Ellipse ellipse = new();
+            Windows.UI.Xaml.Shapes.Ellipse ellipse = new();
             ellipse.Fill = new SolidColorBrush(Colors.Orange);
             ellipse.Width = Math.Abs(x2 - x1);
             ellipse.Height = Math.Abs(y2 - y1);
@@ -49,7 +49,7 @@ namespace DrawingApp.PresentationModel
 
         public void DrawRectangle(double x1, double y1, double x2, double y2)
         {
-            Rectangle rectangle = new();
+            Windows.UI.Xaml.Shapes.Rectangle rectangle = new();
             rectangle.Fill = new SolidColorBrush(Colors.Yellow);
             rectangle.Width = Math.Abs(x2 - x1);
             rectangle.Height = Math.Abs(y2 - y1);

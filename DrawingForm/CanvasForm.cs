@@ -12,8 +12,8 @@ namespace DrawingForm
 {
     public partial class CanvasForm : Form
     {
-        private readonly DrawingModel.Model _model;
-        private readonly PresentationModel.PresentationModel _presentationModel;
+        private DrawingModel.DrawerService _drawerService;
+        private PresentationModel.CanvasFormViewModel _viewModel;
         private readonly Panel _canvas = new DoubleBufferedPanel();
 
         public CanvasForm()
@@ -27,45 +27,72 @@ namespace DrawingForm
             _canvas.Paint += HandleCanvasPaint;
             Controls.Add(_canvas);
 
-            Button clear = new();
-            clear.Text = "Clear";
-            clear.Dock = DockStyle.Top;
-            clear.AutoSize = true;
-            clear.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            clear.Click += HandleClearButtonClick;
-            Controls.Add(clear);
+            Button ClearButton = new();
+            ClearButton.Text = "Clear";
+            ClearButton.Dock = DockStyle.Top;
+            ClearButton.AutoSize = true;
+            ClearButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            ClearButton.Click += HandleClearButtonClick;
+            Controls.Add(ClearButton);
 
-            _model = new();
-            _presentationModel = new(_model, _canvas);
-            _model._modelChanged += HandleModelChanged;
+            InitDefaultDrawingMode();
+        }
+
+        private void InitDefaultDrawingMode()
+        {
+            InitLineMode();
+        }
+
+        public void InitLineMode()
+        {
+            _drawerService = new(new DrawingModel.Line());
+            BindViewModelAndDrawingStateChangeEvent();
+        }
+
+        public void InitRectangleMode()
+        {
+            _drawerService = new(new DrawingModel.Rectangle());
+            BindViewModelAndDrawingStateChangeEvent();
+        }
+
+        public void InitEllipseMode()
+        {
+            _drawerService = new(new DrawingModel.Ellipse());
+            BindViewModelAndDrawingStateChangeEvent();
+        }
+
+        private void BindViewModelAndDrawingStateChangeEvent()
+        {
+            _viewModel = new(_drawerService);
+            _drawerService.DrawingStateChanged += HandleDrawingStateChanged;
         }
 
         public void HandleClearButtonClick(object sender, EventArgs e)
         {
-            _model.Clear();
+            _drawerService.Clear();
         }
 
         public void HandleCanvasPressed(object sender, MouseEventArgs e)
         {
-            _model.PointerPressed(e.X, e.Y);
+            _drawerService.PointerPressed(e.X, e.Y);
         }
 
         public void HandleCanvasReleased(object sender, MouseEventArgs e)
         {
-            _model.PointerReleased(e.X, e.Y);
+            _drawerService.PointerReleased();
         }
 
         public void HandleCanvasMoved(object sender, MouseEventArgs e)
         {
-            _model.PointerMoved(e.X, e.Y);
+            _drawerService.PointerMoved(e.X, e.Y);
         }
 
         public void HandleCanvasPaint(object sender, PaintEventArgs e)
         {
-            _presentationModel.Draw(e.Graphics);
+            _viewModel.Draw(e.Graphics);
         }
 
-        public void HandleModelChanged()
+        public void HandleDrawingStateChanged()
         {
             Invalidate(true);
         }

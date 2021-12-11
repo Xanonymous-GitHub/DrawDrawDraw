@@ -47,14 +47,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\DrawingModel\DrawerService.cs">
+      <Link>Model\DrawerService.cs</Link>
+    </Compile>
+    <Compile Include="..\DrawingModel\Ellipse.cs">
+      <Link>Model\Ellipse.cs</Link>
+    </Compile>
     <Compile Include="..\DrawingModel\IPainter.cs">
       <Link>Model\IPainter.cs</Link>
     </Compile>
     <Compile Include="..\DrawingModel\Line.cs">
       <Link>Model\Line.cs</Link>
     </Compile>
-    <Compile Include="..\DrawingModel\Model.cs">
-      <Link>Model\Model.cs</Link>
+    <Compile Include="..\DrawingModel\Rectangle.cs">
+      <Link>Model\Rectangle.cs</Link>
+    </Compile>
+    <Compile Include="..\DrawingModel\Shape.cs">
+      <Link>Model\Shape.cs</Link>
     </Compile>
     <Compile Include="DoubleBufferedPanel.cs">
       <SubType>Component</SubType>
@@ -65,10 +74,13 @@
     <Compile Include="CanvasForm.Designer.cs">
       <DependentUpon>CanvasForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationModel\PresentationModel.cs" />
-    <Compile Include="PresentationModel\WindowsFormsPainterAdaptor.cs" />
+    <Compile Include="ViewModel\CanvasFormViewModel.cs" />
+    <Compile Include="ViewModel\WinFormPainter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CanvasForm.resx">
+      <DependentUpon>CanvasForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

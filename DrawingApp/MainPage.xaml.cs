@@ -22,44 +22,72 @@ namespace DrawingApp
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private readonly DrawingModel.Model _model;
-        private readonly PresentationModel.PresentationModel _presentationModel;
+        private DrawingModel.DrawerService _drawerService;
+        private PresentationModel.MainPageViewModel _viewModel;
 
         public MainPage()
         {
             InitializeComponent();
-            _model = new();
-            _presentationModel = new(_model, _canvas);
             _canvas.PointerPressed += HandleCanvasPressed;
             _canvas.PointerReleased += HandleCanvasReleased;
             _canvas.PointerMoved += HandleCanvasMoved;
             _clear.Click += HandleClearButtonClick;
-            _model._modelChanged += HandleModelChanged;
+
+            InitDefaultDrawingMode();
+        }
+
+        private void InitDefaultDrawingMode()
+        {
+            InitLineMode();
+        }
+
+        public void InitLineMode()
+        {
+            _drawerService = new(new DrawingModel.Line());
+            BindViewModelAndDrawingStateChangeEvent();
+        }
+
+        public void InitRectangleMode()
+        {
+            _drawerService = new(new DrawingModel.Rectangle());
+            BindViewModelAndDrawingStateChangeEvent();
+        }
+
+        public void InitEllipseMode()
+        {
+            _drawerService = new(new DrawingModel.Ellipse());
+            BindViewModelAndDrawingStateChangeEvent();
+        }
+
+        private void BindViewModelAndDrawingStateChangeEvent()
+        {
+            _viewModel = new(_drawerService, _canvas);
+            _drawerService.DrawingStateChanged += HandleDrawingStateChanged;
         }
 
         private void HandleClearButtonClick(object sender, RoutedEventArgs e)
         {
-            _model.Clear();
+            _drawerService.Clear();
         }
 
         public void HandleCanvasPressed(object sender, PointerRoutedEventArgs e)
         {
-            _model.PointerPressed(e.GetCurrentPoint(_canvas).Position.X, e.GetCurrentPoint(_canvas).Position.Y);
+            _drawerService.PointerPressed(e.GetCurrentPoint(_canvas).Position.X, e.GetCurrentPoint(_canvas).Position.Y);
         }
 
         public void HandleCanvasReleased(object sender, PointerRoutedEventArgs e)
         {
-            _model.PointerReleased(e.GetCurrentPoint(_canvas).Position.X, e.GetCurrentPoint(_canvas).Position.Y);
+            _drawerService.PointerReleased();
         }
 
         public void HandleCanvasMoved(object sender, PointerRoutedEventArgs e)
         {
-            _model.PointerMoved(e.GetCurrentPoint(_canvas).Position.X, e.GetCurrentPoint(_canvas).Position.Y);
+            _drawerService.PointerMoved(e.GetCurrentPoint(_canvas).Position.X, e.GetCurrentPoint(_canvas).Position.Y);
         }
 
-        public void HandleModelChanged()
+        public void HandleDrawingStateChanged()
         {
-            _presentationModel.Draw();
+            _viewModel.Draw();
         }
     }
 }

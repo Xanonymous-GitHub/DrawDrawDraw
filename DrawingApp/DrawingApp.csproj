@@ -117,14 +117,23 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\DrawingModel\DrawerService.cs">
+      <Link>Model\DrawerService.cs</Link>
+    </Compile>
+    <Compile Include="..\DrawingModel\Ellipse.cs">
+      <Link>Model\Ellipse.cs</Link>
+    </Compile>
     <Compile Include="..\DrawingModel\IPainter.cs">
       <Link>Model\IPainter.cs</Link>
     </Compile>
     <Compile Include="..\DrawingModel\Line.cs">
       <Link>Model\Line.cs</Link>
     </Compile>
-    <Compile Include="..\DrawingModel\Model.cs">
-      <Link>Model\Model.cs</Link>
+    <Compile Include="..\DrawingModel\Rectangle.cs">
+      <Link>Model\Rectangle.cs</Link>
+    </Compile>
+    <Compile Include="..\DrawingModel\Shape.cs">
+      <Link>Model\Shape.cs</Link>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -132,8 +141,8 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PresentationModel\PresentationModel.cs" />
-    <Compile Include="PresentationModel\WindowsStorePainterAdaptor.cs" />
+    <Compile Include="ViewModel\MainPageViewModel.cs" />
+    <Compile Include="ViewModel\WinAppPainter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

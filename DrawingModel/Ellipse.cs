@@ -1,10 +1,10 @@
 ﻿namespace DrawingModel
 {
-    internal class Line : Shape
+    internal class Ellipse : Shape
     {
         public override object Clone()
         {
-            Line cloned = new();
+            Ellipse cloned = new();
             cloned.x1 = x1;
             cloned.x2 = x2;
             cloned.y1 = y1;
@@ -14,7 +14,7 @@
 
         public override void DrawBy(IPainter painter)
         {
-            painter.DrawLine(x1, y1, x2, y2);
+            painter.DrawEllipse(x1, x2, y1, y2);
         }
     }
 }

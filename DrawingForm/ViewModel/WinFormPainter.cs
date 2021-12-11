@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace DrawingForm.PresentationModel
 {
-    internal class WindowsFormsPainterAdaptor : IPainter
+    internal class WinFormPainter : IPainter
     {
         Graphics _graphics;
 
-        public WindowsFormsPainterAdaptor(Graphics graphics)
+        public WinFormPainter(Graphics graphics)
         {
             _graphics = graphics;
         }

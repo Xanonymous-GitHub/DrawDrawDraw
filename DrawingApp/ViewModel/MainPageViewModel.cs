@@ -8,20 +8,20 @@ using DrawingModel;
 
 namespace DrawingApp.PresentationModel
 {
-    internal class PresentationModel
+    internal class MainPageViewModel
     {
-        Model _model;
+        DrawerService _drawerService;
         IPainter _painter;
 
-        public PresentationModel(Model model, Canvas canvas)
+        public MainPageViewModel(DrawerService drawerService, Canvas canvas)
         {
-            _model = model;
-            _painter = new WindowsStorePainterAdaptor(canvas);
+            _drawerService = drawerService;
+            _painter = new WinAppPainter(canvas);
         }
 
         public void Draw()
         {
-            _model.DrawBy(_painter);
+            _drawerService.DrawBy(_painter);
         }
     }
 }
