@@ -22,6 +22,8 @@ namespace DrawingModel
             {
                 _drawingShape.x1 = x;
                 _drawingShape.y1 = y;
+                _drawingShape.x2 = x;
+                _drawingShape.y2 = y;
                 _isPressed = true;
             }
         }
