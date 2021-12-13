@@ -31,6 +31,7 @@ namespace DrawingForm.PresentationModel
         {
             SolidBrush solidBrush = new(Color.Orange);
             _graphics.FillEllipse(solidBrush, (float)x1, (float)y1, (float)(x2 - x1), (float)(y2 - y1));
+            _graphics.DrawEllipse(Pens.Black, (float)x1, (float)y1, (float)(x2 - x1), (float)(y2 - y1));
         }
 
         public void DrawLine(double x1, double y1, double x2, double y2)
@@ -53,6 +54,7 @@ namespace DrawingForm.PresentationModel
             }
 
             _graphics.FillRectangle(solidBrush, (float)x1, (float)y1, (float)(x2 - x1), (float)(y2 - y1));
+            _graphics.DrawRectangle(Pens.Black, (float)x1, (float)y1, (float)(x2 - x1), (float)(y2 - y1));
         }
     }
 }
