@@ -22,7 +22,7 @@ namespace DrawingApp
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private DrawingModel.DrawerService _drawerService;
+        private readonly DrawingModel.DrawerService _drawerService = DrawingModel.DrawerService.Instance;
         private PresentationModel.MainPageViewModel _viewModel;
 
         public MainPage()
@@ -31,7 +31,9 @@ namespace DrawingApp
             _canvas.PointerPressed += HandleCanvasPressed;
             _canvas.PointerReleased += HandleCanvasReleased;
             _canvas.PointerMoved += HandleCanvasMoved;
-            _clear.Click += HandleClearButtonClick;
+            ClearCanvasButton.Click += HandleClearButtonClick;
+            UseRectangleButton.Click += HandleRectangleButtonClick;
+            UseEllipseButton.Click += HandleEllipseButtonClick;
 
             InitDefaultDrawingMode();
         }
@@ -43,19 +45,19 @@ namespace DrawingApp
 
         public void InitLineMode()
         {
-            _drawerService = new(new DrawingModel.Line());
+            _drawerService.Use(new DrawingModel.Line());
             BindViewModelAndDrawingStateChangeEvent();
         }
 
         public void InitRectangleMode()
         {
-            _drawerService = new(new DrawingModel.Rectangle());
+            _drawerService.Use(new DrawingModel.Rectangle());
             BindViewModelAndDrawingStateChangeEvent();
         }
 
         public void InitEllipseMode()
         {
-            _drawerService = new(new DrawingModel.Ellipse());
+            _drawerService.Use(new DrawingModel.Ellipse());
             BindViewModelAndDrawingStateChangeEvent();
         }
 
@@ -68,6 +70,16 @@ namespace DrawingApp
         private void HandleClearButtonClick(object sender, RoutedEventArgs e)
         {
             _drawerService.Clear();
+        }
+
+        private void HandleRectangleButtonClick(object sender, RoutedEventArgs e)
+        {
+            InitRectangleMode();
+        }
+
+        private void HandleEllipseButtonClick(object sender, RoutedEventArgs e)
+        {
+            InitEllipseMode();
         }
 
         public void HandleCanvasPressed(object sender, PointerRoutedEventArgs e)

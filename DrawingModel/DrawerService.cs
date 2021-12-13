@@ -1,10 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace DrawingModel
 {
     internal class DrawerService
     {
-        public DrawerService(Shape drawingShape)
+        private static readonly Lazy<DrawerService> lazy = new(() => new());
+
+        public static DrawerService Instance => lazy.Value;
+
+        private DrawerService() { }
+
+        public void Use(Shape drawingShape)
         {
             _drawingShape = drawingShape;
         }
@@ -14,7 +21,7 @@ namespace DrawingModel
 
         private bool _isPressed = false;
         private readonly List<Shape> _shapes = new();
-        private readonly Shape _drawingShape;
+        private Shape _drawingShape;
 
         public void PointerPressed(double x, double y)
         {

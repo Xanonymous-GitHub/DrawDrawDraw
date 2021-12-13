@@ -9,8 +9,10 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Button x:Name="_clear" Content="Clear" Margin="233,214,1001,0" VerticalAlignment="Top" Height="144" Width="266" HorizontalAlignment="Stretch"/>
-        <Canvas x:Name="_canvas" Background="#FFFFFFA0"/>
+        <Canvas x:Name="_canvas" Background="#FFFFFFA0" Margin="0,150,0,0"/>
+        <Button x:Name="UseRectangleButton" Content="Rectangle" Margin="10,32,0,0" VerticalAlignment="Top" Height="92" Width="320" FontSize="48" Background="#FF3F3F3F" />
+        <Button x:Name="UseEllipseButton" Content="Ellipse" Margin="367,32,0,0" VerticalAlignment="Top" Height="92" Width="320" FontSize="48" Background="#FF3F3F3F" />
+        <Button x:Name="ClearCanvasButton" Content="Clear" Margin="713,32,0,0" VerticalAlignment="Top" Height="92" Width="320" FontSize="48" Background="#FF3F3F3F" />
 
     </Grid>
 </Page>

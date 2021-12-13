@@ -12,7 +12,7 @@ namespace DrawingForm
 {
     public partial class CanvasForm : Form
     {
-        private DrawingModel.DrawerService _drawerService;
+        private readonly DrawingModel.DrawerService _drawerService = DrawingModel.DrawerService.Instance;
         private PresentationModel.CanvasFormViewModel _viewModel;
         private readonly Panel _canvas = new DoubleBufferedPanel();
 
@@ -27,14 +27,6 @@ namespace DrawingForm
             _canvas.Paint += HandleCanvasPaint;
             Controls.Add(_canvas);
 
-            Button ClearButton = new();
-            ClearButton.Text = "Clear";
-            ClearButton.Dock = DockStyle.Top;
-            ClearButton.AutoSize = true;
-            ClearButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            ClearButton.Click += HandleClearButtonClick;
-            Controls.Add(ClearButton);
-
             InitDefaultDrawingMode();
         }
 
@@ -45,19 +37,19 @@ namespace DrawingForm
 
         public void InitLineMode()
         {
-            _drawerService = new(new DrawingModel.Line());
+            _drawerService.Use(new DrawingModel.Line());
             BindViewModelAndDrawingStateChangeEvent();
         }
 
         public void InitRectangleMode()
         {
-            _drawerService = new(new DrawingModel.Rectangle());
+            _drawerService.Use(new DrawingModel.Rectangle());
             BindViewModelAndDrawingStateChangeEvent();
         }
 
         public void InitEllipseMode()
         {
-            _drawerService = new(new DrawingModel.Ellipse());
+            _drawerService.Use(new DrawingModel.Ellipse());
             BindViewModelAndDrawingStateChangeEvent();
         }
 
@@ -65,11 +57,6 @@ namespace DrawingForm
         {
             _viewModel = new(_drawerService);
             _drawerService.DrawingStateChanged += HandleDrawingStateChanged;
-        }
-
-        public void HandleClearButtonClick(object sender, EventArgs e)
-        {
-            _drawerService.Clear();
         }
 
         public void HandleCanvasPressed(object sender, MouseEventArgs e)
@@ -95,6 +82,21 @@ namespace DrawingForm
         public void HandleDrawingStateChanged()
         {
             Invalidate(true);
+        }
+
+        private void UseRectangleButton_Click(object sender, EventArgs e)
+        {
+            InitRectangleMode();
+        }
+
+        private void UseEllipseButton_Click(object sender, EventArgs e)
+        {
+            InitEllipseMode();
+        }
+
+        private void ClearCanvasButton_Click(object sender, EventArgs e)
+        {
+            _drawerService.Clear();
         }
     }
 }
