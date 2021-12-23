@@ -7,12 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DrawingModel;
+using Rectangle = DrawingModel.Rectangle;
 
 namespace DrawingForm
 {
     public partial class CanvasForm : Form
     {
-        private readonly DrawingModel.DrawerService _drawerService = DrawingModel.DrawerService.Instance;
+        private readonly DrawerService _drawerService = DrawerService.Instance;
         private PresentationModel.CanvasFormViewModel _viewModel;
         private readonly Panel _canvas = new DoubleBufferedPanel();
 
@@ -37,19 +39,19 @@ namespace DrawingForm
 
         public void InitLineMode()
         {
-            _drawerService.Use(new DrawingModel.Line());
+            _drawerService.Use(Shape.Create<Line>());
             BindViewModelAndDrawingStateChangeEvent();
         }
 
         public void InitRectangleMode()
         {
-            _drawerService.Use(new DrawingModel.Rectangle());
+            _drawerService.Use(Shape.Create<Rectangle>());
             BindViewModelAndDrawingStateChangeEvent();
         }
 
         public void InitEllipseMode()
         {
-            _drawerService.Use(new DrawingModel.Ellipse());
+            _drawerService.Use(Shape.Create<Ellipse>());
             BindViewModelAndDrawingStateChangeEvent();
         }
 

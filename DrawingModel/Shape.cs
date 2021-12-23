@@ -16,5 +16,6 @@ namespace DrawingModel
 
         public abstract object Clone();
         public abstract void DrawBy(IPainter painter);
+        public static Shape Create<T>() where T : Shape, new() => new T();
     }
 }

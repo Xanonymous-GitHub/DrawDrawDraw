@@ -50,5 +50,8 @@
     <Compile Include="Rectangle.cs" />
     <Compile Include="Shape.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include=".editorconfig" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

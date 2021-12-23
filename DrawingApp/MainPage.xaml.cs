@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using DrawingModel;
 
 // 空白頁項目範本已記錄在 https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x404
 
@@ -22,7 +23,7 @@ namespace DrawingApp
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private readonly DrawingModel.DrawerService _drawerService = DrawingModel.DrawerService.Instance;
+        private readonly DrawerService _drawerService = DrawerService.Instance;
         private PresentationModel.MainPageViewModel _viewModel;
 
         public MainPage()
@@ -45,19 +46,19 @@ namespace DrawingApp
 
         public void InitLineMode()
         {
-            _drawerService.Use(new DrawingModel.Line());
+            _drawerService.Use(Shape.Create<Line>());
             BindViewModelAndDrawingStateChangeEvent();
         }
 
         public void InitRectangleMode()
         {
-            _drawerService.Use(new DrawingModel.Rectangle());
+            _drawerService.Use(Shape.Create<Rectangle>());
             BindViewModelAndDrawingStateChangeEvent();
         }
 
         public void InitEllipseMode()
         {
-            _drawerService.Use(new DrawingModel.Ellipse());
+            _drawerService.Use(Shape.Create<Ellipse>());
             BindViewModelAndDrawingStateChangeEvent();
         }
 
