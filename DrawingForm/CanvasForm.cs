@@ -98,5 +98,10 @@ namespace DrawingForm
         {
             _drawerService.Clear();
         }
+
+        private void UseLineButton_Click(object sender, EventArgs e)
+        {
+            InitLineMode();
+        }
     }
 }

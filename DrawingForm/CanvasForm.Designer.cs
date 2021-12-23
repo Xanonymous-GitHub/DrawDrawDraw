@@ -32,11 +32,12 @@ namespace DrawingForm
             this.UseRectangleButton = new System.Windows.Forms.Button();
             this.UseEllipseButton = new System.Windows.Forms.Button();
             this.ClearCanvasButton = new System.Windows.Forms.Button();
+            this.UseLineButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // UseRectangleButton
             // 
-            this.UseRectangleButton.Location = new System.Drawing.Point(337, 12);
+            this.UseRectangleButton.Location = new System.Drawing.Point(199, 12);
             this.UseRectangleButton.Name = "UseRectangleButton";
             this.UseRectangleButton.Size = new System.Drawing.Size(331, 125);
             this.UseRectangleButton.TabIndex = 0;
@@ -46,7 +47,7 @@ namespace DrawingForm
             // 
             // UseEllipseButton
             // 
-            this.UseEllipseButton.Location = new System.Drawing.Point(821, 12);
+            this.UseEllipseButton.Location = new System.Drawing.Point(997, 12);
             this.UseEllipseButton.Name = "UseEllipseButton";
             this.UseEllipseButton.Size = new System.Drawing.Size(331, 125);
             this.UseEllipseButton.TabIndex = 0;
@@ -56,7 +57,7 @@ namespace DrawingForm
             // 
             // ClearCanvasButton
             // 
-            this.ClearCanvasButton.Location = new System.Drawing.Point(1311, 12);
+            this.ClearCanvasButton.Location = new System.Drawing.Point(1415, 12);
             this.ClearCanvasButton.Name = "ClearCanvasButton";
             this.ClearCanvasButton.Size = new System.Drawing.Size(331, 125);
             this.ClearCanvasButton.TabIndex = 0;
@@ -64,11 +65,22 @@ namespace DrawingForm
             this.ClearCanvasButton.UseVisualStyleBackColor = true;
             this.ClearCanvasButton.Click += new System.EventHandler(this.ClearCanvasButton_Click);
             // 
+            // UseLineButton
+            // 
+            this.UseLineButton.Location = new System.Drawing.Point(594, 12);
+            this.UseLineButton.Name = "UseLineButton";
+            this.UseLineButton.Size = new System.Drawing.Size(331, 125);
+            this.UseLineButton.TabIndex = 1;
+            this.UseLineButton.Text = "Line";
+            this.UseLineButton.UseVisualStyleBackColor = true;
+            this.UseLineButton.Click += new System.EventHandler(this.UseLineButton_Click);
+            // 
             // CanvasForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1962, 1298);
+            this.Controls.Add(this.UseLineButton);
             this.Controls.Add(this.ClearCanvasButton);
             this.Controls.Add(this.UseEllipseButton);
             this.Controls.Add(this.UseRectangleButton);
@@ -85,6 +97,7 @@ namespace DrawingForm
         private System.Windows.Forms.Button UseRectangleButton;
         private System.Windows.Forms.Button UseEllipseButton;
         private System.Windows.Forms.Button ClearCanvasButton;
+        private System.Windows.Forms.Button UseLineButton;
     }
 }
 

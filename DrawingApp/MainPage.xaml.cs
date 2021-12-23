@@ -34,6 +34,7 @@ namespace DrawingApp
             ClearCanvasButton.Click += HandleClearButtonClick;
             UseRectangleButton.Click += HandleRectangleButtonClick;
             UseEllipseButton.Click += HandleEllipseButtonClick;
+            UseLineButon.Click += HandleLineButtonClick;
 
             InitDefaultDrawingMode();
         }
@@ -80,6 +81,11 @@ namespace DrawingApp
         private void HandleEllipseButtonClick(object sender, RoutedEventArgs e)
         {
             InitEllipseMode();
+        }
+
+        private void HandleLineButtonClick(object sender, RoutedEventArgs e)
+        {
+            InitLineMode();
         }
 
         public void HandleCanvasPressed(object sender, PointerRoutedEventArgs e)
