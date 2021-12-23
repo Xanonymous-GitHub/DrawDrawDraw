@@ -78,7 +78,7 @@ namespace DrawingForm
 
         public void HandleCanvasPaint(object sender, PaintEventArgs e)
         {
-            _viewModel.Draw(e.Graphics);
+            _viewModel.UpdateCanvas(e.Graphics);
         }
 
         public void HandleDrawingStateChanged()

@@ -10,8 +10,8 @@ namespace DrawingApp.PresentationModel
 {
     internal class MainPageViewModel
     {
-        DrawerService _drawerService;
-        IPainter _painter;
+        private readonly DrawerService _drawerService;
+        private readonly IPainter _painter;
 
         public MainPageViewModel(DrawerService drawerService, Canvas canvas)
         {
@@ -19,9 +19,9 @@ namespace DrawingApp.PresentationModel
             _painter = new WinAppPainter(canvas);
         }
 
-        public void Draw()
+        public void UpdateCanvas()
         {
-            _drawerService.DrawBy(_painter);
+            _drawerService.UpdateCanvasBy(_painter);
         }
     }
 }

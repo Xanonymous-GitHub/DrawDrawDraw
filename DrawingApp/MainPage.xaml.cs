@@ -105,7 +105,7 @@ namespace DrawingApp
 
         public void HandleDrawingStateChanged()
         {
-            _viewModel.Draw();
+            _viewModel.UpdateCanvas();
         }
     }
 }

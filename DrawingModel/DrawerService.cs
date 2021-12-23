@@ -11,10 +11,7 @@ namespace DrawingModel
 
         private DrawerService() { }
 
-        public void Use(Shape drawingShape)
-        {
-            _drawingShape = drawingShape;
-        }
+        public void Use(Shape drawingShape) => _drawingShape = drawingShape;
 
         public event ModelChangedEventHandler DrawingStateChanged;
         public delegate void ModelChangedEventHandler();
@@ -62,7 +59,7 @@ namespace DrawingModel
             NotifyDrawingStateChanged();
         }
 
-        public void DrawBy(IPainter painter)
+        public void UpdateCanvasBy(IPainter painter)
         {
             painter.ClearAll();
             foreach (Shape shape in _shapes)
@@ -76,9 +73,6 @@ namespace DrawingModel
             }
         }
 
-        private void NotifyDrawingStateChanged()
-        {
-            DrawingStateChanged?.Invoke();
-        }
+        private void NotifyDrawingStateChanged() => DrawingStateChanged?.Invoke();
     }
 }
