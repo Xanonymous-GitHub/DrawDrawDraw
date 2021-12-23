@@ -33,11 +33,15 @@ namespace DrawingForm
             this.UseEllipseButton = new System.Windows.Forms.Button();
             this.ClearCanvasButton = new System.Windows.Forms.Button();
             this.UseLineButton = new System.Windows.Forms.Button();
+            this.CanvasFormMainMenuStrip = new System.Windows.Forms.MenuStrip();
+            this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.redoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CanvasFormMainMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // UseRectangleButton
             // 
-            this.UseRectangleButton.Location = new System.Drawing.Point(199, 12);
+            this.UseRectangleButton.Location = new System.Drawing.Point(185, 58);
             this.UseRectangleButton.Name = "UseRectangleButton";
             this.UseRectangleButton.Size = new System.Drawing.Size(331, 125);
             this.UseRectangleButton.TabIndex = 0;
@@ -47,7 +51,7 @@ namespace DrawingForm
             // 
             // UseEllipseButton
             // 
-            this.UseEllipseButton.Location = new System.Drawing.Point(997, 12);
+            this.UseEllipseButton.Location = new System.Drawing.Point(983, 58);
             this.UseEllipseButton.Name = "UseEllipseButton";
             this.UseEllipseButton.Size = new System.Drawing.Size(331, 125);
             this.UseEllipseButton.TabIndex = 0;
@@ -57,7 +61,7 @@ namespace DrawingForm
             // 
             // ClearCanvasButton
             // 
-            this.ClearCanvasButton.Location = new System.Drawing.Point(1415, 12);
+            this.ClearCanvasButton.Location = new System.Drawing.Point(1401, 58);
             this.ClearCanvasButton.Name = "ClearCanvasButton";
             this.ClearCanvasButton.Size = new System.Drawing.Size(331, 125);
             this.ClearCanvasButton.TabIndex = 0;
@@ -67,13 +71,38 @@ namespace DrawingForm
             // 
             // UseLineButton
             // 
-            this.UseLineButton.Location = new System.Drawing.Point(594, 12);
+            this.UseLineButton.Location = new System.Drawing.Point(580, 58);
             this.UseLineButton.Name = "UseLineButton";
             this.UseLineButton.Size = new System.Drawing.Size(331, 125);
             this.UseLineButton.TabIndex = 1;
             this.UseLineButton.Text = "Line";
             this.UseLineButton.UseVisualStyleBackColor = true;
             this.UseLineButton.Click += new System.EventHandler(this.UseLineButton_Click);
+            // 
+            // CanvasFormMainMenuStrip
+            // 
+            this.CanvasFormMainMenuStrip.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
+            this.CanvasFormMainMenuStrip.ImageScalingSize = new System.Drawing.Size(32, 32);
+            this.CanvasFormMainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.undoToolStripMenuItem,
+            this.redoToolStripMenuItem});
+            this.CanvasFormMainMenuStrip.Location = new System.Drawing.Point(0, 0);
+            this.CanvasFormMainMenuStrip.Name = "CanvasFormMainMenuStrip";
+            this.CanvasFormMainMenuStrip.Size = new System.Drawing.Size(1962, 38);
+            this.CanvasFormMainMenuStrip.TabIndex = 2;
+            this.CanvasFormMainMenuStrip.Text = "menuStrip1";
+            // 
+            // undoToolStripMenuItem
+            // 
+            this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(96, 34);
+            this.undoToolStripMenuItem.Text = "Undo";
+            // 
+            // redoToolStripMenuItem
+            // 
+            this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
+            this.redoToolStripMenuItem.Size = new System.Drawing.Size(92, 34);
+            this.redoToolStripMenuItem.Text = "Redo";
             // 
             // CanvasForm
             // 
@@ -84,11 +113,16 @@ namespace DrawingForm
             this.Controls.Add(this.ClearCanvasButton);
             this.Controls.Add(this.UseEllipseButton);
             this.Controls.Add(this.UseRectangleButton);
+            this.Controls.Add(this.CanvasFormMainMenuStrip);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MainMenuStrip = this.CanvasFormMainMenuStrip;
             this.MaximizeBox = false;
             this.Name = "CanvasForm";
             this.Text = "Canvas";
+            this.CanvasFormMainMenuStrip.ResumeLayout(false);
+            this.CanvasFormMainMenuStrip.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -98,6 +132,9 @@ namespace DrawingForm
         private System.Windows.Forms.Button UseEllipseButton;
         private System.Windows.Forms.Button ClearCanvasButton;
         private System.Windows.Forms.Button UseLineButton;
+        private System.Windows.Forms.MenuStrip CanvasFormMainMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem undoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem redoToolStripMenuItem;
     }
 }
 

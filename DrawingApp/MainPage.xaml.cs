@@ -35,7 +35,6 @@ namespace DrawingApp
             UseRectangleButton.Click += HandleRectangleButtonClick;
             UseEllipseButton.Click += HandleEllipseButtonClick;
             UseLineButon.Click += HandleLineButtonClick;
-
             InitDefaultDrawingMode();
         }
 
