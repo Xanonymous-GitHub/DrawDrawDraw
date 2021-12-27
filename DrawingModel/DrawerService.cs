@@ -9,10 +9,7 @@ namespace DrawingModel
 
         public static DrawerService Instance => lazy.Value;
 
-        private DrawerService()
-        {
-            FreezeCurrentSnapShotToPrevious();
-        }
+        private DrawerService() { }
 
         public void Use(Shape drawingShape) => _drawingShape = drawingShape;
 
@@ -28,6 +25,10 @@ namespace DrawingModel
 
         private Stack<List<Shape>> _previousShapesSnapShots = new();
         private Stack<List<Shape>> _nextShapesSnapShots = new();
+
+        public bool CanUndo => _previousShapesSnapShots.Count > 0;
+
+        public bool CanRedo => _nextShapesSnapShots.Count > 0;
 
         public void Undo()
         {
@@ -131,19 +132,19 @@ namespace DrawingModel
         public void Clear()
         {
             _isPressed = false;
-            _shapes.Clear();
             FreezeCurrentSnapShotToPrevious();
             _nextShapesSnapShots.Clear();
+            _shapes.Clear();
             NotifyDrawingStateChanged();
         }
 
-        private void FreezeCurrentSnapShotToPrevious() => _previousShapesSnapShots.Push(_shapes);
+        private void FreezeCurrentSnapShotToPrevious() => _previousShapesSnapShots.Push(new(_shapes));
 
-        private void FreezeCurrentSnapShotToNext() => _nextShapesSnapShots.Push(_shapes);
+        private void FreezeCurrentSnapShotToNext() => _nextShapesSnapShots.Push(new(_shapes));
 
         private void UseLastSnapShot()
         {
-            if (_previousShapesSnapShots.Count > 0)
+            if (CanUndo)
             {
                 _shapes = _previousShapesSnapShots.Pop();
                 NotifyDrawingStateChanged();
@@ -152,7 +153,7 @@ namespace DrawingModel
 
         private void UseNextSnapShot()
         {
-            if (_nextShapesSnapShots.Count > 0)
+            if (CanRedo)
             {
                 _shapes = _nextShapesSnapShots.Pop();
                 NotifyDrawingStateChanged();

@@ -28,7 +28,7 @@ namespace DrawingForm
             _canvas.MouseMove += HandleCanvasMoved;
             _canvas.Paint += HandleCanvasPaint;
             Controls.Add(_canvas);
-
+            UpdateToolStripMenuItem();
             InitDefaultDrawingMode();
         }
 
@@ -79,6 +79,7 @@ namespace DrawingForm
         public void HandleCanvasPaint(object sender, PaintEventArgs e)
         {
             _viewModel.UpdateCanvas(e.Graphics);
+            UpdateToolStripMenuItem();
         }
 
         public void HandleDrawingStateChanged()
@@ -109,11 +110,19 @@ namespace DrawingForm
         private void UndoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _drawerService.Undo();
+            UpdateToolStripMenuItem();
         }
 
         private void RedoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _drawerService.Redo();
+            UpdateToolStripMenuItem();
+        }
+
+        private void UpdateToolStripMenuItem()
+        {
+            UndoToolStripMenuItem.Enabled = _drawerService.CanUndo;
+            RedoToolStripMenuItem.Enabled = _drawerService.CanRedo;
         }
     }
 }

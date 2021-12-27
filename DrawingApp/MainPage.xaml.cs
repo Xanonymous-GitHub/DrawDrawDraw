@@ -38,6 +38,7 @@ namespace DrawingApp
             UseLineButon.Click += HandleLineButtonClick;
             RedoButton.Click += HandleRedoButtonClick;
             UndoButton.Click += HandleUndoButtonClick;
+            UpdateToolStripMenuItem();
             InitDefaultDrawingMode();
         }
 
@@ -93,11 +94,13 @@ namespace DrawingApp
         private void HandleUndoButtonClick(object sender, RoutedEventArgs e)
         {
             _drawerService.Undo();
+            UpdateToolStripMenuItem();
         }
 
         private void HandleRedoButtonClick(object sender, RoutedEventArgs e)
         {
             _drawerService.Redo();
+            UpdateToolStripMenuItem();
         }
 
         public void HandleCanvasPressed(object sender, PointerRoutedEventArgs e)
@@ -118,6 +121,13 @@ namespace DrawingApp
         public void HandleDrawingStateChanged()
         {
             _viewModel.UpdateCanvas();
+            UpdateToolStripMenuItem();
+        }
+
+        private void UpdateToolStripMenuItem()
+        {
+            UndoButton.IsEnabled = _drawerService.CanUndo;
+            RedoButton.IsEnabled = _drawerService.CanRedo;
         }
     }
 }
