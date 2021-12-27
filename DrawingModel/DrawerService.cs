@@ -55,10 +55,10 @@ namespace DrawingModel
             if (_isPressed)
             {
                 _isPressed = false;
+                Shape endPointShape = GetContainedShape(x, y);
 
                 if (_drawingShape.ShouldEndDrawOnShape)
                 {
-                    Shape endPointShape = GetContainedShape(x, y);
                     if (endPointShape == null || endPointShape == _pressedShape)
                     {
                         _pressedShape = null;
@@ -73,7 +73,17 @@ namespace DrawingModel
                     }
                 }
 
-                _shapes.Add((Shape)_drawingShape.Clone());
+                Shape newShapeToAdd = (Shape)_drawingShape.Clone();
+
+                if (_drawingShape.ShouldMoveEndPointsToContainerCenterAfterDrawing)
+                {
+                    newShapeToAdd.x1 = (_pressedShape.x1 + _pressedShape.x2) / 2;
+                    newShapeToAdd.y1 = (_pressedShape.y1 + _pressedShape.y2) / 2;
+                    newShapeToAdd.x2 = (endPointShape.x1 + endPointShape.x2) / 2;
+                    newShapeToAdd.y2 = (endPointShape.y1 + endPointShape.y2) / 2;
+                }
+
+                _shapes.Add(newShapeToAdd);
                 NotifyDrawingStateChanged();
             }
         }
