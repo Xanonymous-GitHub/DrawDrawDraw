@@ -36,6 +36,8 @@ namespace DrawingApp
             UseRectangleButton.Click += HandleRectangleButtonClick;
             UseEllipseButton.Click += HandleEllipseButtonClick;
             UseLineButon.Click += HandleLineButtonClick;
+            RedoButton.Click += HandleRedoButtonClick;
+            UndoButton.Click += HandleUndoButtonClick;
             InitDefaultDrawingMode();
         }
 
@@ -86,6 +88,16 @@ namespace DrawingApp
         private void HandleLineButtonClick(object sender, RoutedEventArgs e)
         {
             InitLineMode();
+        }
+
+        private void HandleUndoButtonClick(object sender, RoutedEventArgs e)
+        {
+            _drawerService.Undo();
+        }
+
+        private void HandleRedoButtonClick(object sender, RoutedEventArgs e)
+        {
+            _drawerService.Redo();
         }
 
         public void HandleCanvasPressed(object sender, PointerRoutedEventArgs e)

@@ -9,7 +9,10 @@ namespace DrawingModel
 
         public static DrawerService Instance => lazy.Value;
 
-        private DrawerService() { }
+        private DrawerService()
+        {
+            FreezeCurrentSnapShotToPrevious();
+        }
 
         public void Use(Shape drawingShape) => _drawingShape = drawingShape;
 
@@ -17,14 +20,33 @@ namespace DrawingModel
         public delegate void ModelChangedEventHandler();
 
         private bool _isPressed = false;
-        private readonly List<Shape> _shapes = new();
+        private List<Shape> _shapes = new();
         private Shape _drawingShape;
         private Shape _pressedShape;
+        private bool _onlyPress = true;
+        private bool _freezed = false;
+
+        private Stack<List<Shape>> _previousShapesSnapShots = new();
+        private Stack<List<Shape>> _nextShapesSnapShots = new();
+
+        public void Undo()
+        {
+            FreezeCurrentSnapShotToNext();
+            UseLastSnapShot();
+        }
+
+        public void Redo()
+        {
+            FreezeCurrentSnapShotToPrevious();
+            UseNextSnapShot();
+        }
 
         public void PointerPressed(double x, double y)
         {
             if (x > 0 && y > 0)
             {
+                _onlyPress = true;
+
                 if (_drawingShape.ShouldStartDrawOnShape)
                 {
                     Shape startPointShape = GetContainedShape(x, y);
@@ -44,6 +66,13 @@ namespace DrawingModel
         {
             if (_isPressed)
             {
+                _onlyPress = false;
+                if (!_freezed)
+                {
+                    FreezeCurrentSnapShotToPrevious();
+                    _nextShapesSnapShots.Clear();
+                    _freezed = true;
+                }
                 _drawingShape.x2 = x;
                 _drawingShape.y2 = y;
                 NotifyDrawingStateChanged();
@@ -55,6 +84,8 @@ namespace DrawingModel
             if (_isPressed)
             {
                 _isPressed = false;
+                if (_onlyPress) return;
+
                 Shape endPointShape = GetContainedShape(x, y);
 
                 if (_drawingShape.ShouldEndDrawOnShape)
@@ -92,7 +123,7 @@ namespace DrawingModel
                 {
                     _shapes.Add(newShapeToAdd);
                 }
-
+                _freezed = false;
                 NotifyDrawingStateChanged();
             }
         }
@@ -101,7 +132,31 @@ namespace DrawingModel
         {
             _isPressed = false;
             _shapes.Clear();
+            FreezeCurrentSnapShotToPrevious();
+            _nextShapesSnapShots.Clear();
             NotifyDrawingStateChanged();
+        }
+
+        private void FreezeCurrentSnapShotToPrevious() => _previousShapesSnapShots.Push(_shapes);
+
+        private void FreezeCurrentSnapShotToNext() => _nextShapesSnapShots.Push(_shapes);
+
+        private void UseLastSnapShot()
+        {
+            if (_previousShapesSnapShots.Count > 0)
+            {
+                _shapes = _previousShapesSnapShots.Pop();
+                NotifyDrawingStateChanged();
+            }
+        }
+
+        private void UseNextSnapShot()
+        {
+            if (_nextShapesSnapShots.Count > 0)
+            {
+                _shapes = _nextShapesSnapShots.Pop();
+                NotifyDrawingStateChanged();
+            }
         }
 
         public void UpdateCanvasBy(IPainter painter)

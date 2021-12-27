@@ -105,5 +105,15 @@ namespace DrawingForm
         {
             InitLineMode();
         }
+
+        private void UndoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _drawerService.Undo();
+        }
+
+        private void RedoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _drawerService.Redo();
+        }
     }
 }

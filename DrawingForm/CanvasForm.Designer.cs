@@ -34,8 +34,8 @@ namespace DrawingForm
             this.ClearCanvasButton = new System.Windows.Forms.Button();
             this.UseLineButton = new System.Windows.Forms.Button();
             this.CanvasFormMainMenuStrip = new System.Windows.Forms.MenuStrip();
-            this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.redoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.UndoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RedoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CanvasFormMainMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -84,25 +84,27 @@ namespace DrawingForm
             this.CanvasFormMainMenuStrip.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.CanvasFormMainMenuStrip.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.CanvasFormMainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.undoToolStripMenuItem,
-            this.redoToolStripMenuItem});
+            this.UndoToolStripMenuItem,
+            this.RedoToolStripMenuItem});
             this.CanvasFormMainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.CanvasFormMainMenuStrip.Name = "CanvasFormMainMenuStrip";
-            this.CanvasFormMainMenuStrip.Size = new System.Drawing.Size(1962, 38);
+            this.CanvasFormMainMenuStrip.Size = new System.Drawing.Size(1962, 42);
             this.CanvasFormMainMenuStrip.TabIndex = 2;
             this.CanvasFormMainMenuStrip.Text = "menuStrip1";
             // 
-            // undoToolStripMenuItem
+            // UndoToolStripMenuItem
             // 
-            this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(96, 34);
-            this.undoToolStripMenuItem.Text = "Undo";
+            this.UndoToolStripMenuItem.Name = "UndoToolStripMenuItem";
+            this.UndoToolStripMenuItem.Size = new System.Drawing.Size(96, 38);
+            this.UndoToolStripMenuItem.Text = "Undo";
+            this.UndoToolStripMenuItem.Click += new System.EventHandler(this.UndoToolStripMenuItem_Click);
             // 
-            // redoToolStripMenuItem
+            // RedoToolStripMenuItem
             // 
-            this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
-            this.redoToolStripMenuItem.Size = new System.Drawing.Size(92, 34);
-            this.redoToolStripMenuItem.Text = "Redo";
+            this.RedoToolStripMenuItem.Name = "RedoToolStripMenuItem";
+            this.RedoToolStripMenuItem.Size = new System.Drawing.Size(92, 38);
+            this.RedoToolStripMenuItem.Text = "Redo";
+            this.RedoToolStripMenuItem.Click += new System.EventHandler(this.RedoToolStripMenuItem_Click);
             // 
             // CanvasForm
             // 
@@ -133,8 +135,8 @@ namespace DrawingForm
         private System.Windows.Forms.Button ClearCanvasButton;
         private System.Windows.Forms.Button UseLineButton;
         private System.Windows.Forms.MenuStrip CanvasFormMainMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem undoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem redoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem UndoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem RedoToolStripMenuItem;
     }
 }
 
