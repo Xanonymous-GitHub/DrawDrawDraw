@@ -31,6 +31,8 @@ namespace DrawingModel
 
         public bool CanRedo => _nextShapesSnapShots.Count > 0;
 
+        public string SelectedShapeDescription => _selectedShapes.Count > 0 ? _selectedShapes[0].GetDescription() : null;
+
         public void Undo()
         {
             _selectedShapes.Clear();

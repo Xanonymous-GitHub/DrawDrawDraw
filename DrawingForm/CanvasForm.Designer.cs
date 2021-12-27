@@ -36,6 +36,7 @@ namespace DrawingForm
             this.CanvasFormMainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.UndoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RedoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SelectedShapeDescriptionLable = new System.Windows.Forms.Label();
             this.CanvasFormMainMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -88,29 +89,38 @@ namespace DrawingForm
             this.RedoToolStripMenuItem});
             this.CanvasFormMainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.CanvasFormMainMenuStrip.Name = "CanvasFormMainMenuStrip";
-            this.CanvasFormMainMenuStrip.Size = new System.Drawing.Size(1962, 42);
+            this.CanvasFormMainMenuStrip.Size = new System.Drawing.Size(1962, 48);
             this.CanvasFormMainMenuStrip.TabIndex = 2;
             this.CanvasFormMainMenuStrip.Text = "menuStrip1";
             // 
             // UndoToolStripMenuItem
             // 
             this.UndoToolStripMenuItem.Name = "UndoToolStripMenuItem";
-            this.UndoToolStripMenuItem.Size = new System.Drawing.Size(96, 38);
+            this.UndoToolStripMenuItem.Size = new System.Drawing.Size(96, 44);
             this.UndoToolStripMenuItem.Text = "Undo";
             this.UndoToolStripMenuItem.Click += new System.EventHandler(this.UndoToolStripMenuItem_Click);
             // 
             // RedoToolStripMenuItem
             // 
             this.RedoToolStripMenuItem.Name = "RedoToolStripMenuItem";
-            this.RedoToolStripMenuItem.Size = new System.Drawing.Size(92, 38);
+            this.RedoToolStripMenuItem.Size = new System.Drawing.Size(92, 44);
             this.RedoToolStripMenuItem.Text = "Redo";
             this.RedoToolStripMenuItem.Click += new System.EventHandler(this.RedoToolStripMenuItem_Click);
+            // 
+            // SelectedShapeDescriptionLable
+            // 
+            this.SelectedShapeDescriptionLable.AutoSize = true;
+            this.SelectedShapeDescriptionLable.Location = new System.Drawing.Point(1072, 1150);
+            this.SelectedShapeDescriptionLable.Name = "SelectedShapeDescriptionLable";
+            this.SelectedShapeDescriptionLable.Size = new System.Drawing.Size(0, 24);
+            this.SelectedShapeDescriptionLable.TabIndex = 3;
             // 
             // CanvasForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1962, 1298);
+            this.Controls.Add(this.SelectedShapeDescriptionLable);
             this.Controls.Add(this.UseLineButton);
             this.Controls.Add(this.ClearCanvasButton);
             this.Controls.Add(this.UseEllipseButton);
@@ -137,6 +147,7 @@ namespace DrawingForm
         private System.Windows.Forms.MenuStrip CanvasFormMainMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem UndoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RedoToolStripMenuItem;
+        private System.Windows.Forms.Label SelectedShapeDescriptionLable;
     }
 }
 

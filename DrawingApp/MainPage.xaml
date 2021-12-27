@@ -9,7 +9,8 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Canvas x:Name="_canvas" Background="#FFFFFFA0" Margin="0,150,0,0"/>
+        <TextBlock x:Name="SelectedShapeDescriptionTextBlock" Canvas.Left="1013" Canvas.Top="782" Text="" TextWrapping="Wrap" Foreground="White" FontSize="36" FontWeight="Normal" Margin="129,961,3,-40"/>
+        <Canvas x:Name="_canvas" Background="#FFFFFFA0" Margin="0,150,0,87"/>
         <Button x:Name="UndoButton" Content="Undo" Margin="39,30,0,0" VerticalAlignment="Top" Height="92" Width="180" FontSize="28" Background="#FF3F3F3F" />
         <Button x:Name="RedoButton" Content="Redo" Margin="241,32,0,0" VerticalAlignment="Top" Height="92" Width="180" FontSize="28" Background="#FF3F3F3F" />
         <Button x:Name="UseRectangleButton" Content="Rectangle" Margin="445,30,0,0" VerticalAlignment="Top" Height="92" Width="180" FontSize="28" Background="#FF3F3F3F" />

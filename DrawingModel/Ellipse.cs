@@ -52,5 +52,7 @@ namespace DrawingModel
             if (IsSelected) painter.DrawEllipseSelectionBorder(x1, y1, x2, y2);
             else painter.DrawEllipse(x1, y1, x2, y2);
         }
+
+        public override string GetDescription() => $"Selected: Ellipse({x1}, {y1}, {x2}, {y2})";
     }
 }

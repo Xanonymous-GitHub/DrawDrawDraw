@@ -59,5 +59,7 @@ namespace DrawingModel
             if (!IsSelected)
                 painter.DrawLine(x1, y1, x2, y2);
         }
+
+        public override string GetDescription() => $"Selected: Line({x1}, {y1}, {x2}, {y2})";
     }
 }

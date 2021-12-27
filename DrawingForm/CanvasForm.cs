@@ -80,6 +80,7 @@ namespace DrawingForm
         {
             _viewModel.UpdateCanvas(e.Graphics);
             UpdateToolStripMenuItem();
+            SelectedShapeDescriptionLable.Text = _drawerService.SelectedShapeDescription;
         }
 
         public void HandleDrawingStateChanged()

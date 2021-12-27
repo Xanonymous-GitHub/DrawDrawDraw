@@ -44,7 +44,7 @@ namespace DrawingApp
 
         private void InitDefaultDrawingMode()
         {
-            InitEllipseMode();
+            InitRectangleMode();
         }
 
         public void InitLineMode()
@@ -122,6 +122,7 @@ namespace DrawingApp
         {
             _viewModel.UpdateCanvas();
             UpdateToolStripMenuItem();
+            SelectedShapeDescriptionTextBlock.Text = _drawerService.SelectedShapeDescription ?? "";
         }
 
         private void UpdateToolStripMenuItem()

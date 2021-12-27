@@ -25,5 +25,6 @@ namespace DrawingModel
         public abstract void DrawBy(IPainter painter);
         public static Shape Create<T>() where T : Shape, new() => new T();
         public abstract bool ContainsPoint(double x, double y);
+        public abstract string GetDescription();
     }
 }
