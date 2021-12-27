@@ -17,6 +17,7 @@ namespace DrawingModel
         public bool ShouldStartDrawOnShape = false;
         public bool ShouldEndDrawOnShape = false;
         public bool ShouldMoveEndPointsToContainerCenterAfterDrawing = false;
+        public bool ShouldMoveToBottomLayerAfterDrawing = false;
 
         public abstract object Clone();
         public abstract void DrawBy(IPainter painter);
