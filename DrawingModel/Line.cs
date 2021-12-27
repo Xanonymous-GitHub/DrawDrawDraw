@@ -54,6 +54,10 @@ namespace DrawingModel
 
             return isInsideTheRange && solpeA == solpeB;
         }
-        public override void DrawBy(IPainter painter) => painter.DrawLine(x1, y1, x2, y2);
+        public override void DrawBy(IPainter painter)
+        {
+            if (!IsSelected)
+                painter.DrawLine(x1, y1, x2, y2);
+        }
     }
 }

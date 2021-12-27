@@ -18,6 +18,7 @@ namespace DrawingModel
 
         private bool _isPressed = false;
         private List<Shape> _shapes = new();
+        private List<Shape> _selectedShapes = new();
         private Shape _drawingShape;
         private Shape _pressedShape;
         private bool _onlyPress = true;
@@ -32,12 +33,14 @@ namespace DrawingModel
 
         public void Undo()
         {
+            _selectedShapes.Clear();
             FreezeCurrentSnapShotToNext();
             UseLastSnapShot();
         }
 
         public void Redo()
         {
+            _selectedShapes.Clear();
             FreezeCurrentSnapShotToPrevious();
             UseNextSnapShot();
         }
@@ -68,8 +71,9 @@ namespace DrawingModel
             if (_isPressed)
             {
                 _onlyPress = false;
-                if (!_freezed)
+                if (!_freezed && x != _drawingShape.x1 && y != _drawingShape.y1)
                 {
+                    _selectedShapes.Clear();
                     FreezeCurrentSnapShotToPrevious();
                     _nextShapesSnapShots.Clear();
                     _freezed = true;
@@ -89,10 +93,16 @@ namespace DrawingModel
 
                 if (_onlyPress)
                 {
+                    _selectedShapes.Clear();
                     if (endPointShape != null)
                     {
-                        _shapes.ForEach(shape => shape.IsSelected = false);
-                        endPointShape.IsSelected = true;
+                        Shape newSelectedShape = (Shape)endPointShape.Clone();
+                        newSelectedShape.x1 = endPointShape.x1;
+                        newSelectedShape.y1 = endPointShape.y1;
+                        newSelectedShape.x2 = endPointShape.x2;
+                        newSelectedShape.y2 = endPointShape.y2;
+                        newSelectedShape.IsSelected = true;
+                        _selectedShapes.Add(newSelectedShape);
                         NotifyDrawingStateChanged();
                     }
 
@@ -110,6 +120,7 @@ namespace DrawingModel
                         _drawingShape.x2 = 0;
                         _drawingShape.y1 = 0;
                         _drawingShape.y2 = 0;
+                        _previousShapesSnapShots.Pop();
                         NotifyDrawingStateChanged();
                         return;
                     }
@@ -145,6 +156,7 @@ namespace DrawingModel
             FreezeCurrentSnapShotToPrevious();
             _nextShapesSnapShots.Clear();
             _shapes.Clear();
+            _selectedShapes.Clear();
             NotifyDrawingStateChanged();
         }
 
@@ -173,9 +185,15 @@ namespace DrawingModel
         public void UpdateCanvasBy(IPainter painter)
         {
             painter.ClearAll();
+
             foreach (Shape shape in _shapes)
             {
                 shape.DrawBy(painter);
+            }
+
+            foreach (Shape selectedShape in _selectedShapes)
+            {
+                selectedShape.DrawBy(painter);
             }
 
             if (_isPressed)

@@ -115,7 +115,7 @@ namespace DrawingApp.PresentationModel
                 StrokeDashArray = new() { 1, 1, 4 },
                 StrokeThickness = 6,
                 StrokeDashOffset = 0,
-        };
+            };
 
             Canvas.SetTop(rectangle, y1);
             Canvas.SetLeft(rectangle, x1);

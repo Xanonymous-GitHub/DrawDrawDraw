@@ -44,8 +44,8 @@ namespace DrawingModel
 
         public override void DrawBy(IPainter painter)
         {
-            painter.DrawRectangle(x1, y1, x2, y2);
             if (IsSelected) painter.DrawRectangleSelectionBorder(x1, y1, x2, y2);
+            else painter.DrawRectangle(x1, y1, x2, y2);
         }
     }
 }
