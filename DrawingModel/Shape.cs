@@ -14,6 +14,8 @@ namespace DrawingModel
         public double x2;
         public double y2;
 
+        public bool IsSelected = false;
+
         public bool ShouldStartDrawOnShape = false;
         public bool ShouldEndDrawOnShape = false;
         public bool ShouldMoveEndPointsToContainerCenterAfterDrawing = false;

@@ -50,6 +50,11 @@ namespace DrawingApp.PresentationModel
             _canvas.Children.Add(ellipse);
         }
 
+        public void DrawEllipseSelectionBorder(double x1, double y1, double x2, double y2)
+        {
+            DrawRectangleSelectionBorder(x1, y1, x2, y2);
+        }
+
         public void DrawLine(double x1, double y1, double x2, double y2)
         {
             Windows.UI.Xaml.Shapes.Line line = new()
@@ -82,6 +87,35 @@ namespace DrawingApp.PresentationModel
                 Fill = new SolidColorBrush(Colors.Yellow),
                 Stroke = new SolidColorBrush(Colors.Black)
             };
+
+            Canvas.SetTop(rectangle, y1);
+            Canvas.SetLeft(rectangle, x1);
+
+            _canvas.Children.Add(rectangle);
+        }
+
+        public void DrawRectangleSelectionBorder(double x1, double y1, double x2, double y2)
+        {
+            if(x1 > x2)
+            {
+                (x1, x2) = (x2, x1);
+            }
+
+            if (y1 > y2)
+            {
+                (y1, y2) = (y2, y1);
+            }
+
+            Windows.UI.Xaml.Shapes.Rectangle rectangle = new()
+            {
+                Width = Math.Abs(x2 - x1),
+                Height = Math.Abs(y2 - y1),
+                Fill = new SolidColorBrush(Colors.Transparent),
+                Stroke = new SolidColorBrush(Colors.Red),
+                StrokeDashArray = new() { 1, 1, 4 },
+                StrokeThickness = 6,
+                StrokeDashOffset = 0,
+        };
 
             Canvas.SetTop(rectangle, y1);
             Canvas.SetLeft(rectangle, x1);

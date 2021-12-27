@@ -85,9 +85,19 @@ namespace DrawingModel
             if (_isPressed)
             {
                 _isPressed = false;
-                if (_onlyPress) return;
-
                 Shape endPointShape = GetContainedShape(x, y);
+
+                if (_onlyPress)
+                {
+                    if (endPointShape != null)
+                    {
+                        _shapes.ForEach(shape => shape.IsSelected = false);
+                        endPointShape.IsSelected = true;
+                        NotifyDrawingStateChanged();
+                    }
+
+                    return;
+                }
 
                 if (_drawingShape.ShouldEndDrawOnShape)
                 {

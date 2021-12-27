@@ -42,6 +42,10 @@ namespace DrawingModel
             return Math.Abs(x - x1) <= xD && Math.Abs(x - x2) <= xD && Math.Abs(y - y1) <= yD && Math.Abs(y - y2) <= yD;
         }
 
-        public override void DrawBy(IPainter painter) => painter.DrawRectangle(x1, y1, x2, y2);
+        public override void DrawBy(IPainter painter)
+        {
+            painter.DrawRectangle(x1, y1, x2, y2);
+            if (IsSelected) painter.DrawRectangleSelectionBorder(x1, y1, x2, y2);
+        }
     }
 }

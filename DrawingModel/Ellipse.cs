@@ -47,6 +47,10 @@ namespace DrawingModel
 
             return (Math.Pow(x - h, 2) / Math.Pow(rx, 2)) + (Math.Pow(y - k, 2) / Math.Pow(ry, 2)) <= 1;
         }
-        public override void DrawBy(IPainter painter) => painter.DrawEllipse(x1, y1, x2, y2);
+        public override void DrawBy(IPainter painter)
+        {
+            painter.DrawEllipse(x1, y1, x2, y2);
+            if (IsSelected) painter.DrawEllipseSelectionBorder(x1, y1, x2, y2);
+        }
     }
 }
