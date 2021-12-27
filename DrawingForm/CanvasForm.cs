@@ -68,7 +68,7 @@ namespace DrawingForm
 
         public void HandleCanvasReleased(object sender, MouseEventArgs e)
         {
-            _drawerService.PointerReleased();
+            _drawerService.PointerReleased(e.X, e.Y);
         }
 
         public void HandleCanvasMoved(object sender, MouseEventArgs e)

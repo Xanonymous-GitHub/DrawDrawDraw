@@ -20,10 +20,19 @@ namespace DrawingModel
         private readonly List<Shape> _shapes = new();
         private Shape _drawingShape;
 
+        private int _pressedShapeHash;
+
         public void PointerPressed(double x, double y)
         {
             if (x > 0 && y > 0)
             {
+                if (_drawingShape.ShouldStartDrawOnShape)
+                {
+                    int? startPointShapeHash = GetContainedShapeHash(x, y);
+                    if (startPointShapeHash == null) return;
+                    _pressedShapeHash = (int)startPointShapeHash;
+                }
+
                 _drawingShape.x1 = x;
                 _drawingShape.y1 = y;
                 _drawingShape.x2 = x;
@@ -42,11 +51,29 @@ namespace DrawingModel
             }
         }
 
-        public void PointerReleased()
+        public void PointerReleased(double x, double y)
         {
             if (_isPressed)
             {
                 _isPressed = false;
+
+                if (_drawingShape.ShouldEndDrawOnShape)
+                {
+                    int? endPointShapeHash = GetContainedShapeHash(x, y);
+                    if (endPointShapeHash == null || endPointShapeHash == _pressedShapeHash)
+                    {
+                        _pressedShapeHash = new();
+
+                        // TODO: re-init _drawingShape, not set properties to 0;
+                        _drawingShape.x1 = 0;
+                        _drawingShape.x2 = 0;
+                        _drawingShape.y1 = 0;
+                        _drawingShape.y2 = 0;
+                        NotifyDrawingStateChanged();
+                        return;
+                    }
+                }
+
                 _shapes.Add((Shape)_drawingShape.Clone());
                 NotifyDrawingStateChanged();
             }
@@ -74,5 +101,18 @@ namespace DrawingModel
         }
 
         private void NotifyDrawingStateChanged() => DrawingStateChanged?.Invoke();
+
+        private int? GetContainedShapeHash(double x, double y)
+        {
+            foreach (Shape shape in _shapes)
+            {
+                if (shape.ContainsPoint(x, y))
+                {
+                    return shape.GetHashCode();
+                }
+            }
+
+            return null;
+        }
     }
 }

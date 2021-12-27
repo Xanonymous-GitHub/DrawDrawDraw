@@ -95,7 +95,7 @@ namespace DrawingApp
 
         public void HandleCanvasReleased(object sender, PointerRoutedEventArgs e)
         {
-            _drawerService.PointerReleased();
+            _drawerService.PointerReleased(e.GetCurrentPoint(_canvas).Position.X, e.GetCurrentPoint(_canvas).Position.Y);
         }
 
         public void HandleCanvasMoved(object sender, PointerRoutedEventArgs e)

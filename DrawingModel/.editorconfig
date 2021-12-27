@@ -2,3 +2,6 @@
 
 # IDE0022: 使用方法的區塊主體
 csharp_style_expression_bodied_methods = true
+
+# IDE0011: 加入大括號
+csharp_prefer_braces = false

@@ -14,8 +14,12 @@ namespace DrawingModel
         public double x2;
         public double y2;
 
+        public bool ShouldStartDrawOnShape = false;
+        public bool ShouldEndDrawOnShape = false;
+
         public abstract object Clone();
         public abstract void DrawBy(IPainter painter);
         public static Shape Create<T>() where T : Shape, new() => new T();
+        public abstract bool ContainsPoint(double x, double y);
     }
 }
