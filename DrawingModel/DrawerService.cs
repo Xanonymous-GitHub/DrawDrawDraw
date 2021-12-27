@@ -19,8 +19,7 @@ namespace DrawingModel
         private bool _isPressed = false;
         private readonly List<Shape> _shapes = new();
         private Shape _drawingShape;
-
-        private int _pressedShapeHash;
+        private Shape _pressedShape;
 
         public void PointerPressed(double x, double y)
         {
@@ -28,9 +27,9 @@ namespace DrawingModel
             {
                 if (_drawingShape.ShouldStartDrawOnShape)
                 {
-                    int? startPointShapeHash = GetContainedShapeHash(x, y);
-                    if (startPointShapeHash == null) return;
-                    _pressedShapeHash = (int)startPointShapeHash;
+                    Shape startPointShape = GetContainedShape(x, y);
+                    if (startPointShape == null) return;
+                    _pressedShape = startPointShape;
                 }
 
                 _drawingShape.x1 = x;
@@ -59,10 +58,10 @@ namespace DrawingModel
 
                 if (_drawingShape.ShouldEndDrawOnShape)
                 {
-                    int? endPointShapeHash = GetContainedShapeHash(x, y);
-                    if (endPointShapeHash == null || endPointShapeHash == _pressedShapeHash)
+                    Shape endPointShape = GetContainedShape(x, y);
+                    if (endPointShape == null || endPointShape == _pressedShape)
                     {
-                        _pressedShapeHash = new();
+                        _pressedShape = null;
 
                         // TODO: re-init _drawingShape, not set properties to 0;
                         _drawingShape.x1 = 0;
@@ -102,13 +101,13 @@ namespace DrawingModel
 
         private void NotifyDrawingStateChanged() => DrawingStateChanged?.Invoke();
 
-        private int? GetContainedShapeHash(double x, double y)
+        private Shape GetContainedShape(double x, double y)
         {
             foreach (Shape shape in _shapes)
             {
                 if (shape.ContainsPoint(x, y))
                 {
-                    return shape.GetHashCode();
+                    return shape;
                 }
             }
 

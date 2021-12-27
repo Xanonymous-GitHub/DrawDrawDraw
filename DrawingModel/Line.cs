@@ -8,7 +8,7 @@ namespace DrawingModel
         {
             ShouldStartDrawOnShape = true;
             ShouldEndDrawOnShape = true;
-            ShouldFixPositionAfterDrawing = true;
+            ShouldMoveEndPointsToContainerCenterAfterDrawing = true;
         }
 
         public override object Clone()
