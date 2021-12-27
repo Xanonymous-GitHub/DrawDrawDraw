@@ -83,7 +83,16 @@ namespace DrawingModel
                     newShapeToAdd.y2 = (endPointShape.y1 + endPointShape.y2) / 2;
                 }
 
-                _shapes.Add(newShapeToAdd);
+                if (_drawingShape.ShouldMoveToBottomLayerAfterDrawing)
+                {
+                    int insertIndex = Math.Min(_shapes.IndexOf(_pressedShape), _shapes.IndexOf(endPointShape));
+                    _shapes.Insert(insertIndex, newShapeToAdd);
+                }
+                else
+                {
+                    _shapes.Add(newShapeToAdd);
+                }
+
                 NotifyDrawingStateChanged();
             }
         }
@@ -113,11 +122,12 @@ namespace DrawingModel
 
         private Shape GetContainedShape(double x, double y)
         {
-            foreach (Shape shape in _shapes)
+            int shapeAmount = _shapes.Count;
+            for (int i = shapeAmount - 1; i >= 0; i--)
             {
-                if (shape.ContainsPoint(x, y))
+                if (_shapes[i].ContainsPoint(x, y))
                 {
-                    return shape;
+                    return _shapes[i];
                 }
             }
 
