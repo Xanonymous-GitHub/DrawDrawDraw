@@ -8,6 +8,7 @@ namespace DrawingModel
         {
             ShouldStartDrawOnShape = true;
             ShouldEndDrawOnShape = true;
+            ShouldFixPositionAfterDrawing = true;
         }
 
         public override object Clone()
@@ -47,8 +48,8 @@ namespace DrawingModel
 
             bool isInsideTheRange = Math.Abs(x - x1) <= xD && Math.Abs(x - x2) <= xD && Math.Abs(y - y1) <= yD && Math.Abs(y - y2) <= yD;
 
-            double solpeA = (x - x1) / (y - y1);
-            double solpeB = (x - x2) / (y - y2);
+            double solpeA = (y - y1) / (x - x1);
+            double solpeB = (y - y2) / (x - x2);
 
             return isInsideTheRange && solpeA == solpeB;
         }

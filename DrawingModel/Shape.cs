@@ -16,6 +16,7 @@ namespace DrawingModel
 
         public bool ShouldStartDrawOnShape = false;
         public bool ShouldEndDrawOnShape = false;
+        public bool ShouldFixPositionAfterDrawing = false;
 
         public abstract object Clone();
         public abstract void DrawBy(IPainter painter);
