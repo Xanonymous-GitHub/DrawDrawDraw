@@ -21,10 +21,23 @@ namespace DrawingModel
         public bool ShouldMoveEndPointsToContainerCenterAfterDrawing = false;
         public bool ShouldMoveToBottomLayerAfterDrawing = false;
 
+        public Shape ReferenceShapeA = null;
+        public Shape ReferenceShapeB = null;
+
         public abstract object Clone();
         public abstract void DrawBy(IPainter painter);
         public static Shape Create<T>() where T : Shape, new() => new T();
         public abstract bool ContainsPoint(double x, double y);
         public abstract string GetDescription();
+        public void Move(double x, double y)
+        {
+            x1 += x;
+            x2 += x;
+            y1 += y;
+            y2 += y;
+        }
+
+        public double CenterX => (x1 + x2) / 2;
+        public double CenterY => (y1 + y2) / 2;
     }
 }

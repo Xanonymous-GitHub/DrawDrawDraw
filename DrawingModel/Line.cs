@@ -57,7 +57,16 @@ namespace DrawingModel
         public override void DrawBy(IPainter painter)
         {
             if (!IsSelected)
-                painter.DrawLine(x1, y1, x2, y2);
+            {
+                if (ReferenceShapeA != null && ReferenceShapeB != null)
+                {
+                    painter.DrawLine(ReferenceShapeA.CenterX, ReferenceShapeA.CenterY, ReferenceShapeB.CenterX, ReferenceShapeB.CenterY);
+                }
+                else
+                {
+                    painter.DrawLine(x1, y1, x2, y2);
+                }
+            }
         }
 
         public override string GetDescription() => $"Selected: Line({x1}, {y1}, {x2}, {y2})";

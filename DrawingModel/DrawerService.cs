@@ -23,6 +23,9 @@ namespace DrawingModel
         private Shape _pressedShape;
         private bool _onlyPress = true;
         private bool _freezed = false;
+        private bool _shouldUpdateMovedShapeReference = false;
+        private double? _movingVectorX = null;
+        private double? _movingVectorY = null;
 
         private Stack<List<Shape>> _previousShapesSnapShots = new();
         private Stack<List<Shape>> _nextShapesSnapShots = new();
@@ -73,6 +76,7 @@ namespace DrawingModel
             if (_isPressed)
             {
                 _onlyPress = false;
+
                 if (!_freezed && x != _drawingShape.x1 && y != _drawingShape.y1)
                 {
                     _selectedShapes.Clear();
@@ -80,8 +84,22 @@ namespace DrawingModel
                     _nextShapesSnapShots.Clear();
                     _freezed = true;
                 }
-                _drawingShape.x2 = x;
-                _drawingShape.y2 = y;
+
+                Shape containedShape = GetContainedShape(x, y);
+
+                if (containedShape != null && !_drawingShape.ShouldMoveEndPointsToContainerCenterAfterDrawing)
+                {
+                    containedShape.Move(x - _movingVectorX ?? 0, y - _movingVectorY ?? 0);
+                    _shouldUpdateMovedShapeReference = true;
+                    _movingVectorX = x;
+                    _movingVectorY = y;
+                }
+                else if (_movingVectorX == null && _movingVectorY == null)
+                {
+                    _drawingShape.x2 = x;
+                    _drawingShape.y2 = y;
+                }
+
                 NotifyDrawingStateChanged();
             }
         }
@@ -91,6 +109,9 @@ namespace DrawingModel
             if (_isPressed)
             {
                 _isPressed = false;
+                _movingVectorX = null;
+                _movingVectorY = null;
+
                 Shape endPointShape = GetContainedShape(x, y);
 
                 if (_onlyPress)
@@ -122,7 +143,7 @@ namespace DrawingModel
                         _drawingShape.x2 = 0;
                         _drawingShape.y1 = 0;
                         _drawingShape.y2 = 0;
-                        _previousShapesSnapShots.Pop();
+                        _ = _previousShapesSnapShots.Pop();
                         NotifyDrawingStateChanged();
                         return;
                     }
@@ -132,10 +153,8 @@ namespace DrawingModel
 
                 if (_drawingShape.ShouldMoveEndPointsToContainerCenterAfterDrawing)
                 {
-                    newShapeToAdd.x1 = (_pressedShape.x1 + _pressedShape.x2) / 2;
-                    newShapeToAdd.y1 = (_pressedShape.y1 + _pressedShape.y2) / 2;
-                    newShapeToAdd.x2 = (endPointShape.x1 + endPointShape.x2) / 2;
-                    newShapeToAdd.y2 = (endPointShape.y1 + endPointShape.y2) / 2;
+                    newShapeToAdd.ReferenceShapeA = _pressedShape;
+                    newShapeToAdd.ReferenceShapeB = endPointShape;
                 }
 
                 if (_drawingShape.ShouldMoveToBottomLayerAfterDrawing)
@@ -147,6 +166,14 @@ namespace DrawingModel
                 {
                     _shapes.Add(newShapeToAdd);
                 }
+
+                if (_shouldUpdateMovedShapeReference && _pressedShape != null)
+                {
+                    _shouldUpdateMovedShapeReference = false;
+                    Shape target = _shapes[_shapes.FindIndex((shape) => _pressedShape.GetHashCode() == shape.GetHashCode())];
+                    target.Move(x - _movingVectorX ?? 0, y - _movingVectorY ?? 0);
+                }
+
                 _freezed = false;
                 NotifyDrawingStateChanged();
             }
